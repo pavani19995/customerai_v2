@@ -157,14 +157,12 @@ def Customer_Satisfaction():
             #st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
             #st.subheader("Overall NPS Result by CustomerID")
             pd_df_nps_cust_wid2=pd_df_nps_cust_wid.groupby(['Overall_NPS_Result']) .apply(lambda x: pd.Series({'CUSTOMER_COUNT' : x['customerid'].count()}))
-            pd_df_nps_cust_wid2 = pd_df_nps_cust_wid2.reset_index(drop=True)
-
+            pd_df_nps_cust_wid2=pd_df_nps_cust_wid2.reset_index(0)
             pd_df_nps_cust_wid2.rename(columns = {'Overall_NPS_Result':'Overall_NPS_Result', 'CUSTOMER_COUNT':'Count of Customers'}, inplace = True)
-            fig = px.pie(pd_df_nps_cust_wid2, names='Overall_NPS_Result', values='CUSTOMER_COUNT', hole=0.65, color='Overall_NPS_Result',
-            color_discrete_map={'promote':'#0CC368',
-                                'detract':'#E01F27',
-                                'passive':'#FFBB00'})
-
+            fig = px.pie(pd_df_nps_cust_wid2, names='Overall_NPS_Result', values='Count of Customers', hole = 0.65, color='Overall_NPS_Result',
+                    color_discrete_map={'promote':'#0CC368',
+                                        'detract':'#E01F27',
+                                        'passive':'#FFBB00'})
             fig.update_layout(
                         autosize=True,
                         width=350,
